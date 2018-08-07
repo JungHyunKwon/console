@@ -4,7 +4,11 @@
  * @since 2018-08-02
  * @version 1.0.0
  */
-if(!(window.console instanceof Object)) {
+
+'use strict';
+
+//객체일때
+if(!(window.console instanceof Object && window.console.constructor === Object)) {
 	window.console = {
 		method : [
 			'assert',
