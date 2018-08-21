@@ -43,6 +43,8 @@
 					}else if(!isFinite(value)) {
 						result = value.toString();
 					}
+				}else if(result === 'console') {
+					result = 'object';
 				}
 			}
 		}
@@ -51,7 +53,7 @@
 	}
 
 	//객체가 아닐때
-	if(consoleType !== 'object') {
+	if(getType(window.console) !== 'object') {
 		window.console = {
 			method : ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			comment : []
