@@ -5,10 +5,8 @@
  * @version 1.0.0
  */
 
-'use strict';
-
 (function() {
-	var consoleType = getType(window.console);
+	'use strict';
 
 	/**
 	 * @name 형태얻기
@@ -52,8 +50,8 @@
 		return result;
 	}
 
-	//객체가 아니거나 콘솔이 아닐때
-	if(consoleType !== 'object' || consoleType !== 'console') {
+	//객체가 아닐때
+	if(consoleType !== 'object') {
 		window.console = {
 			method : ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			comment : []
