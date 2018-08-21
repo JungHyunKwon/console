@@ -14,7 +14,7 @@
 	 * @param {*} value
 	 * @return {string || undefined}
 	 */
-	function getType(value) {
+	function _getType(value) {
 		var result;
 		
 		//매개변수가 있을때
@@ -53,7 +53,7 @@
 	}
 
 	//객체가 아닐때
-	if(getType(window.console) !== 'object') {
+	if(_getType(window.console) !== 'object') {
 		window.console = {
 			method : ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			comment : []
