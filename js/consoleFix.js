@@ -47,6 +47,14 @@
 				//콘솔일때
 				}else if(result === 'console') {
 					result = 'object';
+				
+				//요소일때
+				}else if(result.indexOf('element') > -1) {
+					result = 'element';
+				
+				//문서일때
+				}else if(result.indexOf('document') > -1) {
+					result = 'document';
 				}
 			}
 		}
