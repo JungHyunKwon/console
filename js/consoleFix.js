@@ -64,8 +64,9 @@
 
 	//객체가 아닐 때
 	if(_getType(console) !== 'object') {
-		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'];
-
+		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
+			methodCodes = '';
+			
 		window.console = {
 			replace : []
 		};
@@ -73,36 +74,36 @@
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
 			var methodName = methodNames[i];
 
-			//함수가 아닐 때
-			if(typeof window.console[methodName] !== 'function') {
-				var methodCode = 'window.console[\'' + methodName + '\'] = function() {\n';
+			methodCodes += 'window.console[\'' + methodName + '\'] = function() {\n';
+			methodCodes += '\tvar result = [],\n';
+			methodCodes += '\t\targumentsLength = arguments.length;\n\n';
 
-				methodCode += '\tvar result = [],\n';
-				methodCode += '\t\targumentsLength = arguments.length;\n\n';
+			//매개변수가 두 개 이상일 때
+			methodCodes += '\tif(argumentsLength > 1) {\n';
+			methodCodes += '\t\tfor(var i = 0; i < argumentsLength; i++) {\n';
+			methodCodes += '\t\t\tresult.push(arguments[i]);\n';
+			methodCodes += '\t\t}\n';
 
-				//매개변수가 두 개 이상일 때
-				methodCode += '\tif(argumentsLength > 1) {\n';
-				methodCode += '\t\tfor(var i = 0; i < argumentsLength; i++) {\n';
-				methodCode += '\t\t\tresult.push(arguments[i]);\n';
-				methodCode += '\t\t}\n';
+			//매개변수가 한 개일 때
+			methodCodes += '\t}else if(argumentsLength === 1) {\n';
+			methodCodes += '\t\tresult = arguments[0];\n';
+			methodCodes += '\t}\n\n';
 
-				//매개변수가 한 개일 때
-				methodCode += '\t}else if(argumentsLength === 1) {\n';
-				methodCode += '\t\tresult = arguments[0];\n';
-				methodCode += '\t}\n\n';
-
-				//매개변수가 있을 때
-				methodCode += '\tif(argumentsLength) {\n';
-				methodCode += '\t\tthis.replace.push({\n';
-				methodCode += '\t\t\tmethodName : \'' + methodName + '\',\n';
-				methodCode += '\t\t\tvalue : result\n';
-				methodCode += '\t\t});\n';
-				methodCode += '\t}\n\n';
-				methodCode += '\treturn this.replace;\n';
-				methodCode += '};';
-
-				eval(methodCode);
-			}
+			//매개변수가 있을 때
+			methodCodes += '\tif(argumentsLength) {\n';
+			methodCodes += '\t\tthis.replace.push({\n';
+			methodCodes += '\t\t\tmethodName : \'' + methodName + '\',\n';
+			methodCodes += '\t\t\tvalue : result\n';
+			methodCodes += '\t\t});\n';
+			methodCodes += '\t}\n\n';
+			methodCodes += '\treturn this.replace;\n';
+			methodCodes += '};\n\n';
 		}
+		
+		//마지막 개행 제거
+		methodCodes = methodCodes.replace(/\n$/, '');
+
+		//함수 기입
+		eval(methodCodes);
 	}
 })(window.console);
