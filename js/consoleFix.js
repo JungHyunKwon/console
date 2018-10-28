@@ -68,7 +68,7 @@
 			methodCode = '';
 			
 		window.console = {
-			replace : []
+			replacement : []
 		};
 
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
@@ -91,12 +91,12 @@
 
 			//매개변수가 있을 때
 			methodCode += '\tif(argumentsLength) {\n';
-			methodCode += '\t\tthis.replace.push({\n';
+			methodCode += '\t\tthis.replacement.push({\n';
 			methodCode += '\t\t\tmethodName : \'' + methodName + '\',\n';
 			methodCode += '\t\t\tvalue : result\n';
 			methodCode += '\t\t});\n';
 			methodCode += '\t}\n\n';
-			methodCode += '\treturn this.replace;\n';
+			methodCode += '\treturn this.replacement;\n';
 			methodCode += '};\n\n';
 		}
 		
