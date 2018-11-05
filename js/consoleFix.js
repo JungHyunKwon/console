@@ -19,40 +19,40 @@
 		
 		//매개변수가 있을 때
 		if(arguments.length) {
-			//null 일 때
+			//null일때
 			if(value === null) {
 				result = 'null';
 			
-			//undefined 일 때
+			//undefined일 때
 			}else if(value === undefined) {
 				result = 'undefined';
 			}else{
 				result = Object.prototype.toString.call(value).toLowerCase().replace('[object ', '').replace(']', '');
 				
-				//Invalid Date 일 때
+				//Invalid Date일 때
 				if(result === 'date' && isNaN(new Date(value))) {
 					result = 'Invalid Date';
 				
-				//숫자 일 때
+				//숫자일 때
 				}else if(result === 'number') {
-					//NaN 일 때
+					//NaN일 때
 					if(isNaN(value)) {
 						result = 'NaN';
 					
-					//Infinity 일 때
+					//Infinity일 때
 					}else if(!isFinite(value)) {
 						result = value.toString();
 					}
 				
-				//콘솔 일 때
-				}else if(result === 'console') {
+				//콘솔이거나 매개변수일 때
+				}else if(result === 'console' || result === 'arguments') {
 					result = 'object';
 				
-				//요소 일 때
+				//요소일 때
 				}else if(result.indexOf('element') > -1) {
 					result = 'element';
 				
-				//문서 일 때
+				//문서일 때
 				}else if(result.indexOf('document') > -1) {
 					result = 'document';
 				}
