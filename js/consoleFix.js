@@ -8,52 +8,8 @@
 (function(console) {
 	'use strict';
 
-	/**
-	 * @name 형태 얻기
-	 * @since 2017-12-06
-	 * @param {*} value
-	 * @return {string}
-	 */
-	function _getType(value) {
-		var result = '';
-		
-		//매개변수가 있을 때
-		if(arguments.length) {
-			//null일때
-			if(value === null) {
-				result = 'null';
-			
-			//undefined일 때
-			}else if(value === undefined) {
-				result = 'undefined';
-			}else{
-				result = Object.prototype.toString.call(value).toLowerCase().replace('[object ', '').replace(']', '');
-				
-				//Invalid Date일 때
-				if(result === 'date' && isNaN(new Date(value))) {
-					result = 'Invalid Date';
-				
-				//숫자일 때
-				}else if(result === 'number') {
-					//NaN일 때
-					if(isNaN(value)) {
-						result = 'NaN';
-					
-					//Infinity일 때
-					}else if(!isFinite(value)) {
-						result = value.toString();
-					}
-				}
-			}
-		}
-
-		return result;
-	}
-	
-	var consoleType = _getType(console);
-
 	//콘솔이 없을 때
-	if(consoleType !== 'object' && consoleType !== 'console') {
+	if(!console) {
 		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			methodCode = '';
 			
