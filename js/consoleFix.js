@@ -12,10 +12,10 @@
 	 * @name 형태 얻기
 	 * @since 2017-12-06
 	 * @param {*} value
-	 * @return {string || undefined}
+	 * @return {string}
 	 */
 	function _getType(value) {
-		var result;
+		var result = '';
 		
 		//매개변수가 있을 때
 		if(arguments.length) {
@@ -43,27 +43,17 @@
 					}else if(!isFinite(value)) {
 						result = value.toString();
 					}
-				
-				//콘솔일 때
-				}else if(result === 'console') {
-					result = 'object';
-				
-				//요소일 때
-				}else if(result.indexOf('element') > -1) {
-					result = 'element';
-				
-				//문서일 때
-				}else if(result.indexOf('document') > -1) {
-					result = 'document';
 				}
 			}
 		}
 
 		return result;
 	}
+	
+	var consoleType = _getType(console);
 
-	//객체가 아닐 때
-	if(_getType(console) !== 'object') {
+	//콘솔이 없을 때
+	if(consoleType !== 'object' && consoleType !== 'console') {
 		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			methodCode = '';
 			
