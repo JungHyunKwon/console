@@ -24,7 +24,7 @@
 
 			methodCode += 'console[\'' + methodName + '\'] = function() {\n';
 			methodCode += '    var result = [],\n';
-			methodCode += '        argumentsLength = arguments.length;\n\n';
+			methodCode += '        argumentsLength = arguments.length,\n';
 			methodCode += '        replacement = this.replacement;\n\n';
 
 			//매개변수가 두 개 이상일 때
