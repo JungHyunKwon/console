@@ -21,28 +21,28 @@
 			var methodName = methodNames[i];
 
 			methodCode += 'window.console[\'' + methodName + '\'] = function() {\n';
-			methodCode += '\tvar result = [],\n';
-			methodCode += '\t\targumentsLength = arguments.length;\n\n';
+			methodCode += '    var result = [],\n';
+			methodCode += '        argumentsLength = arguments.length;\n\n';
 
 			//매개변수가 두 개 이상일 때
-			methodCode += '\tif(argumentsLength > 1) {\n';
-			methodCode += '\t\tfor(var i = 0; i < argumentsLength; i++) {\n';
-			methodCode += '\t\t\tresult.push(arguments[i]);\n';
-			methodCode += '\t\t}\n';
+			methodCode += '    if(argumentsLength > 1) {\n';
+			methodCode += '        for(var i = 0; i < argumentsLength; i++) {\n';
+			methodCode += '            result.push(arguments[i]);\n';
+			methodCode += '        }\n';
 
 			//매개변수가 한 개일 때
-			methodCode += '\t}else if(argumentsLength === 1) {\n';
-			methodCode += '\t\tresult = arguments[0];\n';
-			methodCode += '\t}\n\n';
+			methodCode += '    }else if(argumentsLength === 1) {\n';
+			methodCode += '        result = arguments[0];\n';
+			methodCode += '    }\n\n';
 
 			//매개변수가 있을 때
-			methodCode += '\tif(argumentsLength) {\n';
-			methodCode += '\t\tthis.replacement.push({\n';
-			methodCode += '\t\t\tmethodName : \'' + methodName + '\',\n';
-			methodCode += '\t\t\tvalue : result\n';
-			methodCode += '\t\t});\n';
-			methodCode += '\t}\n\n';
-			methodCode += '\treturn this.replacement;\n';
+			methodCode += '    if(argumentsLength) {\n';
+			methodCode += '        this.replacement.push({\n';
+			methodCode += '            methodName : \'' + methodName + '\',\n';
+			methodCode += '            value : result\n';
+			methodCode += '        });\n';
+			methodCode += '    }\n\n';
+			methodCode += '    return this.replacement;\n';
 			methodCode += '};\n\n';
 		}
 		
