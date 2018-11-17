@@ -17,12 +17,15 @@
 			replacement : []
 		};
 
+		console = window.console;
+
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
 			var methodName = methodNames[i];
 
-			methodCode += 'window.console[\'' + methodName + '\'] = function() {\n';
+			methodCode += 'console[\'' + methodName + '\'] = function() {\n';
 			methodCode += '    var result = [],\n';
 			methodCode += '        argumentsLength = arguments.length;\n\n';
+			methodCode += '        replacement = this.replacement;\n\n';
 
 			//매개변수가 두 개 이상일 때
 			methodCode += '    if(argumentsLength > 1) {\n';
@@ -37,12 +40,12 @@
 
 			//매개변수가 있을 때
 			methodCode += '    if(argumentsLength) {\n';
-			methodCode += '        this.replacement.push({\n';
+			methodCode += '        replacement.push({\n';
 			methodCode += '            methodName : \'' + methodName + '\',\n';
 			methodCode += '            value : result\n';
 			methodCode += '        });\n';
 			methodCode += '    }\n\n';
-			methodCode += '    return this.replacement;\n';
+			methodCode += '    return replacement;\n';
 			methodCode += '};\n\n';
 		}
 		
