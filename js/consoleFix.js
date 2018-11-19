@@ -5,20 +5,18 @@
  * @version 1.0.0
  */
 
-(function(console) {
+(function() {
 	'use strict';
 
 	//콘솔이 없을 때
-	//if(!console) {
+	if(!console) {
 		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			methodCode = '',
 			replacement = [];
 			
-		window.console = {
+		console = {
 			replacement : replacement
 		};
-
-		console = window.console;
 
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
 			var methodName = methodNames[i];
@@ -49,5 +47,5 @@
 
 		//함수 기입
 		eval(methodCode);
-	//}
-})(window.console);
+	}
+})();
