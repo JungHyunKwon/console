@@ -11,10 +11,11 @@
 	//콘솔이 없을 때
 	if(!console) {
 		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
-			methodCode = '';
+			methodCode = '',
+			replacement = [];
 			
 		window.console = {
-			replacement : []
+			replacement : replacement
 		};
 
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
@@ -35,7 +36,7 @@
 			methodCode += '        result.value = arguments[0];\n';
 			methodCode += '    }\n\n';
 			methodCode += '    if(argumentsLength) {\n';
-			methodCode += '        this.replacement.push(result);\n';
+			methodCode += '        replacement.push(result);\n';
 			methodCode += '    }\n\n';
 			methodCode += '    return result;\n';
 			methodCode += '};\n\n';
