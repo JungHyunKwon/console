@@ -12,10 +12,10 @@
 	if(!console) {
 		var methodNames = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			methodCode = '',
-			replacement = [];
+			alt = [];
 			
 		window.console = {
-			replacement : replacement
+			alt : alt
 		};
 
 		for(var i = 0, methodsLength = methodNames.length; i < methodsLength; i++) {
@@ -36,7 +36,7 @@
 			methodCode += '        result.value = arguments[0];\n';
 			methodCode += '    }\n\n';
 			methodCode += '    if(argumentsLength) {\n';
-			methodCode += '        replacement.push(result);\n';
+			methodCode += '        alt.push(result);\n';
 			methodCode += '    }\n\n';
 			methodCode += '    return result;\n';
 			methodCode += '};\n\n';
