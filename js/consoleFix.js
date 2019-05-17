@@ -41,9 +41,6 @@
 			methodCode += '    return result;\n';
 			methodCode += '};\n\n';
 		}
-		
-		//마지막 개행 제거
-		methodCode = methodCode.replace(/\n$/, '');
 
 		//함수 기입
 		eval(methodCode);
