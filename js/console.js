@@ -1,5 +1,5 @@
 /**
- * @name consoleFix
+ * @name console
  * @author JungHyunKwon
  * @since 2018-08-02
  * @version 1.0.0
