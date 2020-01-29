@@ -9,7 +9,7 @@
 
 	//콘솔이 없을 때
 	if(!console) {
-		var methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
+		var method = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
 			alt = [],
 			slice = Array.prototype.slice;
 			
@@ -17,15 +17,19 @@
 			alt : alt
 		};
 
-		for(var i = 0, methodsLength = methods.length; i < methodsLength; i++) {
+		for(var i = 0, methodLength = method.length; i < methodLength; i++) {
 			(function(method) {
 				console[method] = function() {
+					var value = slice.call(arguments);
+
 					alt.push({
 						method : method,
-						value : slice.call(arguments)
+						value : value
 					});
+
+					return value;
 				};			
-			})(methods[i]);
+			})(method[i]);
 		}
 	}
 })(window.console);
